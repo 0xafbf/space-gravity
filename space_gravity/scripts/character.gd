@@ -37,6 +37,8 @@ func _physics_process(delta):
 	var desired_forward = basis * Vector3.FORWARD
 	
 	var direction = basis * direction_local
+	direction = direction.normalized()
+	
 	if direction.length() > 0.01:
 		desired_forward = direction
 	
