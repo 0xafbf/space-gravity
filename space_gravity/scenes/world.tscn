@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://deduu3b1uqa68"]
+
+[ext_resource type="Script" path="res://space_gravity/scripts/character.gd" id="1_e21jf"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ek686"]
+radius = 10.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_leixv"]
+radius = 10.0
+height = 20.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6jmo3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_idb5p"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vx5q4"]
+size = Vector3(0.778, 0.342, 0.62)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qtfcn"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="Space" type="Node3D"]
+
+[node name="Planet" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planet"]
+shape = SubResource("SphereShape3D_ek686")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Planet"]
+mesh = SubResource("SphereMesh_leixv")
+
+[node name="Character" type="CharacterBody3D" parent="."]
+transform = Transform3D(-0.411281, 0.725969, -0.551196, -0.314539, 0.454528, 0.833348, 0.855519, 0.516113, 0.0414069, 6.94007, 8.52876, 5.9675)
+script = ExtResource("1_e21jf")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Character"]
+shape = SubResource("CapsuleShape3D_6jmo3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Character"]
+mesh = SubResource("BoxMesh_idb5p")
+
+[node name="Eyes" type="MeshInstance3D" parent="Character"]
+transform = Transform3D(0.999999, 0, -1.49012e-08, -1.0691e-07, 1, -8.9407e-08, 4.24257e-09, -1.49012e-07, 0.999999, -4.76837e-07, 0.635547, -0.41667)
+mesh = SubResource("BoxMesh_vx5q4")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_qtfcn")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.963984, -0.0880832, 0.25095, 0, 0.943564, 0.33119, -0.26596, -0.319262, 0.909581, 26.1514, 17.0392, 49.5738)
+current = true
+fov = 40.6
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.571802, 0, 0.820391, -0.612316, 0.66553, 0.426777, -0.545995, -0.746371, 0.380552, 10.1369, 15.7922, 26.9511)
